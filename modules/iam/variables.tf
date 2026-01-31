@@ -1,3 +1,3 @@
-variable "role_name" {
-    default = "ecstaskexecution_role"
-}
+# variable "role_name" {
+#     default = "ecstaskexecution_role"
+# }

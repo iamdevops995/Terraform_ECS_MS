@@ -14,12 +14,13 @@ resource "aws_ecs_task_definition" "helloservice-task" {
   network_mode             = "awsvpc"
   cpu                      = 256
   memory                   = 512
-  execution_role_arn = var.execution_role_arn
+  execution_role_arn = "arn:aws:iam::211125578268:role/ecsTaskExecutionRole"
+
   
   container_definitions = jsonencode([
     {
       name      = "helloservice"
-      image     = "iamdevops995/iamdevops995/helloservice:v1"
+      image     = "iamdevops995/helloservice:v1"
       cpu       = 10
       memory    = 256
       essential = true
@@ -47,14 +48,14 @@ resource "aws_ecs_task_definition" "helloservice-task" {
 }
 #service
 
-resource "aws_ecs_service" "mongo" {
+resource "aws_ecs_service" "ecs-service" {
   name            = var.service_name
   cluster         = aws_ecs_cluster.ecs_ms_cluster.id
   task_definition = aws_ecs_task_definition.helloservice-task.arn
   desired_count   = 3
-  iam_role        = var.execution_role_arn
+  # iam_role = "arn:aws:iam::211125578268:role/ecsTaskExecutionRole"
   launch_type     = "FARGATE"
-  depends_on      = [aws_iam_role_policy.ecs_task_execution_role_policy_attachment]
+  # depends_on      = [aws_iam_role_policy.ecs_task_execution_role_policy_attachment]
 
   network_configuration {
     subnets         = var.public_subnet_ids

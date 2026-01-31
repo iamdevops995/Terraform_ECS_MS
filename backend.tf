@@ -1,9 +1,9 @@
 terraform {
   backend "s3" {
-    bucket = var.bucket
-    key = "bucket/ecs-microservice-store.tfstate"
-    region = var.region
+    bucket       = "ecs-microservice-store"
+    key          = "bucket/ecs-microservice-store.tfstate"
+    region       = "us-east-1"
     use_lockfile = true
-    
+
   }
 }
