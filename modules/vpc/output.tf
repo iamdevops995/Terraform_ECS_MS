@@ -4,10 +4,14 @@ output "vpc_id" {
 output "igw-id" {
   value = aws_internet_gateway.ecs-vpc-igw.id
 }
-output "private-ids" {
+output "private_subnet_ids" {
   value = aws_subnet.private[*].id
 }
 
 output "public_subnet_ids" {
   value = aws_subnet.public[*].id
+}
+
+output "ecs-sg-id" {
+  value = aws_security_group.ecs-sg.id
 }
